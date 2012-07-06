@@ -9,10 +9,10 @@ Author URI: http://joshmccarty.com
 License: GNU General Public License, version 2 (GPL).
 */
 
-/*  Copyright 2011  Josh McCarty  (email : info@joshmccarty.com)
+/*  Copyright 2011 Josh McCarty  (email : josh@joshmccarty.com)
 
     This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
+    it under the terms of the GNU General Public License, version 2, as
     published by the Free Software Foundation.
 
     This program is distributed in the hope that it will be useful,
@@ -28,7 +28,7 @@ License: GNU General Public License, version 2 (GPL).
 function jsnow_load_script() {
     wp_register_script( 'jsnow', plugins_url( 'jquery.jSnow.js', __FILE__ ), array( 'jquery' ), false, true );
     wp_enqueue_script( 'jsnow' );
-} 
+}
 add_action( 'wp_enqueue_scripts', 'jsnow_load_script' );
 
 ?>
