@@ -6,7 +6,7 @@ Tested up to: 3.4.1
 Stable tag: 1.0
 License: GPLv2
 
-JAM jSnow adds a falling snow effect to your WordPress site.
+Add a falling snow effect to your WordPress site.
 
 == Description ==
 
