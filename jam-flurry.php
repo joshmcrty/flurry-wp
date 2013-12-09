@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: jSnow Falling Snow
-Plugin URI: http://joshmccarty.com
-Description: Adds falling snow to your site using the jSnow plugin for jQuery.
-Version: 0.2
+Plugin Name: Flurry
+Plugin URI: https://github.com/joshmcrty/jam-flurry
+Description: Adds falling snow to your site using the Flurry plugin for jQuery.
+Version: 0.3
 Author: Josh McCarty
 Author URI: http://joshmccarty.com
 License: GNU General Public License, version 2 (GPL).
 */
 
-/*  Copyright 2011 Josh McCarty  (email : josh@joshmccarty.com)
+/*  Copyright 2013 Josh McCarty  (email : josh@joshmccarty.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
@@ -25,10 +25,9 @@ License: GNU General Public License, version 2 (GPL).
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-function jsnow_load_script() {
-    wp_register_script( 'jsnow', plugins_url( 'jquery.jSnow.js', __FILE__ ), array( 'jquery' ), false, true );
-    wp_enqueue_script( 'jsnow' );
+function jam_flurry_load_script() {
+    wp_enqueue_script( 'flurry', plugins_url( 'jquery.flurry.min.js', __FILE__ ), array( 'jquery' ), false, true );
 }
-add_action( 'wp_enqueue_scripts', 'jsnow_load_script' );
+add_action( 'wp_enqueue_scripts', 'jam_flurry_load_script' );
 
 ?>
