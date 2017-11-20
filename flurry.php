@@ -43,12 +43,7 @@ register_deactivation_hook( __FILE__, 'flurry_deactivate' );
  *
  * @since Flurry 1.0
  */
-function flurry_settings_init(  ) {
-
-	// Check that the current user can access the options page.
-	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( __( 'You do not have sufficient permissions to access this page.', 'flurry' ) );
-	}
+function flurry_settings_init() {
 
 	// Register the setting
 	register_setting(
@@ -72,7 +67,7 @@ function flurry_settings_init(  ) {
 		'flurry_advanced_options_section_callback',
 		'flurry_options'
 	);
-
+	
 	// Get the array of settings fields
 	$flurry_settings = flurry_settings_fields();
 
@@ -92,7 +87,7 @@ function flurry_settings_init(  ) {
 			$id,              // HTML `id` attribute to use for the field when rendered
 			$label,           // Label displayed for the field
 			$callback,        // Callback function to render the field
-			'flurry_options', // Menu page to display this field on; see `flurry_add_admin_menu)_`
+			'flurry_options', // Menu page to display this field on; see `flurry_add_admin_menu_`
 			$section,         // Identifier of the section to include this field in; see first argument in `add_settings_section()`
 			$callback_args    // Arguments to pass to the callback function; `label_for` outputs a label with a `for` attribute matching the field `id` attribute
 		);
@@ -103,7 +98,7 @@ add_action( 'admin_init', 'flurry_settings_init' );
 /**
  * Add Flurry options page to the admin menu under 'Appearance'.
  */
-function flurry_add_admin_menu(  ) {
+function flurry_add_admin_menu() {
 	add_submenu_page(
 		'themes.php',         // Which admin section to show this page under
 		'Flurry',             // Name of the page
@@ -139,6 +134,21 @@ add_action( 'after_setup_theme', 'flurry_after_setup_theme' );
  * @return array An array of arrays with each field's information
  */
 function flurry_settings_fields() {
+	
+	$monthValues = array(
+		1 => __( 'January', 'flurry' ),
+		2 => __( 'February', 'flurry' ),
+		3 => __( 'March', 'flurry' ),
+		4 => __( 'April', 'flurry' ),
+		5 => __( 'May', 'flurry' ),
+		6 => __( 'June', 'flurry' ),
+		7 => __( 'July', 'flurry' ),
+		8 => __( 'August', 'flurry' ),
+		9 => __( 'September', 'flurry' ),
+		10 => __( 'October', 'flurry' ),
+		11 => __( 'November', 'flurry' ),
+		12 => __( 'December', 'flurry' ),
+	);
 
 	return array(
 		array(
