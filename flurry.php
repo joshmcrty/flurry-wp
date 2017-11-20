@@ -3,7 +3,7 @@
 Plugin Name: Flurry
 Plugin URI: https://github.com/joshmcrty/flurry-wp
 Description: Adds falling snow to your site using the Flurry plugin for jQuery.
-Version: 1.0
+Version: 1.0.1
 Author: Josh McCarty
 Author URI: http://joshmccarty.com
 License: GPL2
