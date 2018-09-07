@@ -160,10 +160,34 @@ function flurry_settings_fields() {
 			'description' => __( 'Determines the character(s) to use for snowflakes. If more than one are chosen, each flake will randomly select a character to use. The "snowflake" and "snowman" characters may be converted into emoji by WordPress.', 'flurry' ),
 		),
 		array(
+			'name' => 'customCharacters',
+			'type' => 'text',
+			'label' => __( 'Custom Characters', 'flurry' ),
+			'description' => __( 'Enables using custom character(s) for snowflakes. You can enter any unicode character. If more than one character is entered, each flake will randomly select a character to use. These will be used in addition to any snowflake characters checked above. Leave blank if you only want to use the characters checked above or the defaults.', 'flurry' ),
+		),
+		array(
 			'name' => 'color',
 			'type' => 'color',
 			'label' => __( 'Color', 'flurry' ),
-			'description' => __( 'Determines the CSS <code>color</code> of the snowflake. Default is <code>#ffffff</code> (white).', 'flurry' ),
+			'description' => __( 'Determines the CSS <code>color</code> of the snowflakes. Default is <code>#ffffff</code> (white).', 'flurry' ),
+		),
+		array(
+			'name' => 'color2',
+			'type' => 'color',
+			'label' => __( 'Color 2', 'flurry' ),
+			'description' => __( 'Determines additional CSS <code>color</code>s of the snowflakes. If more than one color is specified, each flake will randomly select a color to use. Default is no color (blank/clear).', 'flurry' ),
+		),
+		array(
+			'name' => 'color3',
+			'type' => 'color',
+			'label' => __( 'Color 3', 'flurry' ),
+			'description' => __( 'Determines additional CSS <code>color</code>s of the snowflakes. If more than one color is specified, each flake will randomly select a color to use. Default is no color (blank/clear).', 'flurry' ),
+		),
+		array(
+			'name' => 'color4',
+			'type' => 'color',
+			'label' => __( 'Color 4', 'flurry' ),
+			'description' => __( 'Determines additional CSS <code>color</code>s of the snowflakes. If more than one color is specified, each flake will randomly select a color to use. Default is no color (blank/clear).', 'flurry' ),
 		),
 		array(
 			'name' => 'height',
@@ -233,6 +257,13 @@ function flurry_settings_fields() {
 			'label' => __( 'Rotation Variance', 'flurry' ),
 			'section' => 'flurry_advanced_options_section',
 			'description' => __( 'Controls how much each snowflake’s rotation will be randomized by in degrees; lower creates less random rotation. Default is <code>180</code>.'),
+		),
+		array(
+			'name' => 'startRotation',
+			'type' => 'number',
+			'label' => __( 'Start Rotation', 'flurry' ),
+			'section' => 'flurry_advanced_options_section',
+			'description' => __( 'Controls what each flake’s initial CSS transform rotation will be. Default is <code>0</code>.'),
 		),
 		array(
 			'name' => 'startOpacity',
@@ -480,6 +511,7 @@ function flurry_character_options() {
 		'❅' => '❅ tight trifoliate snowflake',
 		'❆' => '❆ heavy chevron snowflake',
 		'☃' => '☃ snowman',
+		'~' => '~ tilde (confetti)'
 	);
 
 	return apply_filters( 'flurry_character_options', $characters );
@@ -489,14 +521,14 @@ function flurry_character_options() {
  * Callback function used for the settings section. Outputs some descriptive text.
  */
 function flurry_basic_options_section_callback() {
-	echo __( '<p>Flurry already uses default settings, so you don’t have to change any settings unless you want to modify the falling snow effect.</p><p><strong>Note:</strong> If you leave a setting blank it will use the default value.</p>', 'flurry' );
+	echo __( '<p>Flurry already uses default settings, so you don’t have to change any settings unless you want to modify the falling snow effect.</p><p><strong>Note:</strong> If you leave a setting blank it will use the default value from the Flurry script.</p>', 'flurry' );
 }
 
 /**
  * Callback function used for the settings section. Outputs some descriptive text.
  */
 function flurry_advanced_options_section_callback() {
-	echo __( '<p>You can fine-tune the falling snow with these advanced settings.</p><p><strong>Note:</strong> If you leave a setting blank it will use the default value.</p>', 'flurry' );
+	echo __( '<p>You can fine-tune the falling snow with these advanced settings.</p><p><strong>Note:</strong> If you leave a setting blank it will use the default value from the Flurry script.</p>', 'flurry' );
 }
 
 /**
@@ -697,6 +729,25 @@ function flurry_load_flurry_scripts() {
 	// Format array of characters to string of characters
 	if ( isset( $options['character'] ) ) {
 		$options['character'] = implode( '', $options['character']);
+	}
+
+	// Include custom characters
+	if ( isset( $options['customCharacters'] ) ) {
+		$options['character'] .= $options['customCharacters'];
+		unset( $options['customCharacters'] );
+	}
+
+	// Set array of colors
+	if (
+		isset( $options['color'] ) ||
+		isset( $options['color2'] ) ||
+		isset( $options['color3'] ) ||
+		isset( $options['color4'] )
+	) {
+		$options['color'] = array_filter( array( $options['color'], $options['color2'], $options['color3'], $options['color4'] ) );
+		unset( $options['color2'] );
+		unset( $options['color3'] );
+		unset( $options['color4'] );
 	}
 
 	// Set `blur` to false if `disableBlur` is checked
