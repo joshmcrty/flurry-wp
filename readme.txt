@@ -3,7 +3,7 @@ Contributors: joshmccarty
 Tags: flurry, snow, falling snow, snowing, jquery, winter
 Requires at least: 4.5
 Tested up to: 4.9.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,9 @@ Not currently, although a vanilla JS version may be available in the future.
 1. All of the available settings for Flurry
 
 == Changelog ==
+= 1.1.1 =
+* Ensure the latest Flurry script is loaded if browser has an older version cached
+
 = 1.1.0 =
 * Update to latest version of Flurry jQuery plugin
 * Add additional character, color, and startRotation options
@@ -63,7 +66,6 @@ Not currently, although a vanilla JS version may be available in the future.
 * First public release
 
 == Upgrade Notice ==
-
 = 1.0 =
 Provides the latest version of Flurry for jQuery with improved performance.
 
@@ -72,3 +74,6 @@ Fixes a permissions issue for non-admin users.
 
 = 1.1.0 = 
 Provides the latest version of Flurry for jQuery with additional customization options.
+
+= 1.1.1 =
+Ensures the latest Flurry script is loaded by browsers.
