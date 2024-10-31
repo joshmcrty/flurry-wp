@@ -151,6 +151,13 @@ function flurry_settings_fields() {
 	);
 
 	return array(
+		
+		array(
+			'name' => 'disableFlurry',
+			'type' => 'checkbox',
+			'label' => __( 'Disable Flurry', 'flurry' ),
+			'checkbox_label' => __( 'Check this to turn off Flurry without deactivating or uninstalling the plugin. You may need to delete/flush site cache after saving to see the change.', 'flurry' ),
+		),
 		array(
 			'name' => 'character',
 			'type' => 'checkbox',
@@ -725,6 +732,11 @@ add_action( 'admin_enqueue_scripts', 'flurry_load_admin_scripts' );
 function flurry_load_flurry_scripts() {
 
 	$options = get_option( 'flurry_settings' );
+
+	// Bail out early if Flurry is disabled
+	if ( isset( $options['disableFlurry'] ) ) {
+		return;
+	}
 
 	// Format array of characters to string of characters
 	if ( isset( $options['character'] ) ) {
